@@ -4,3 +4,18 @@ server:
 spring:
   application:
     name: agent-demo
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+    # 启用 info
+    info:
+      enabled: true
+    health:
+      enabled: true
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: ssm

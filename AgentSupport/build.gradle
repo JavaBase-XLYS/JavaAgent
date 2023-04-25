@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group 'org.xlys.agent'
+version 'v1'
+
+ext {
+    author='LX47326'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation('org.javassist:javassist:3.29.0-GA')
+    implementation('org.projectlombok:lombok:1.18.24')
+    annotationProcessor('org.projectlombok:lombok:1.18.24')
+}
+
+jar {
+    manifest {
+        attributes(
+                'Premain-Class': 'org.xlys.agent.bytecode.Agent',
+                'Built-by': author
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.springframework.boot'
+}
+
+
+group 'org.xlys.agent'
+version 'v1'
+
+ext {
+    mainClassName = 'org.xlys.ja.AgentApplication'
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation('org.springframework.boot:spring-boot-starter-web:2.7.10')
+    implementation('org.projectlombok:lombok:1.18.24')
+    annotationProcessor('org.projectlombok:lombok:1.18.24')
+}
+
+
+springBoot {
+    mainClassName = 'org.xlys.ja.AgentApplication'
+}
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+//    from {
+//        configurations.runtimeClasspath.collect {
+//            it.isDirectory() ? it : zipTree(it)
+//        }
+//    }
+//    into('assets') {
+//        from 'assets'
+//    }
+}
+test {
+    useJUnitPlatform()
+}
